@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Keys Battle | Открытие кейсов скинов и оружия</title>
+    <link rel="icon" type="image/png" href="https://avatars.mds.yandex.net/i?id=1a02d375a183d167ac5a620ffdf3571e_l-4256054-images-thumbs&n=13">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="particles-bg"></div>
+<div class="scanlines"></div>
+
+<header id="main-header">
+    <div class="container header-container">
+        <div class="logo">
+            <img src="https://avatars.mds.yandex.net/i?id=1a02d375a183d167ac5a620ffdf3571e_l-4256054-images-thumbs&n=13" alt="Keys Battle" class="logo-icon">
+            Keys<span>Battle</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-box-open"></i> Кейсы</a></li>
+                <li><a href="#cases"><i class="fas fa-fire"></i> Популярное</a></li>
+                <li><a href="#history"><i class="fas fa-history"></i> История</a></li>
+                <li><a href="#provably-fair"><i class="fas fa-shield-alt"></i> Provably Fair</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Рулетка прокрутки -->
+    <div class="roulette-overlay" id="rouletteOverlay">
+        <div class="roulette-container">
+            <div class="roulette-header">
+                <h2><i class="fas fa-dice"></i> ОТКРЫТИЕ КЕЙСА</h2>
+                <button class="close-roulette" id="closeRoulette"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="roulette-display">
+                <div class="indicators">
+                    <div class="indicator left"></div>
+                    <div class="indicator right"></div>
+                </div>
+                <div class="roulette-track" id="rouletteTrack">
+                    <div class="item-slot">
+                        <div class="slot-content">
+                            <i class="fas fa-gun"></i>
+                            <span>AK-47</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-line"></div>
+            </div>
+            <div class="roulette-info">
+                <p id="rouletteStatus">Нажмите "КРУТИТЬ" для открытия</p>
+            </div>
+            <button class="spin-btn" id="spinBtn">
+                <i class="fas fa-sync-alt"></i> КРУТИТЬ
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="glow-title">
+                    <h1><span class="icon-left">⚔️</span> KEYS BATTLE <span class="icon-right">⚔️</span></h1>
+                </div>
+                <p>Открывай кейсы и получай легендарные скины, ножи и редкие предметы. Система мгновенных выигрышей!</p>
+                
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span class="stat-value">12,847</span>
+                        <span class="stat-label">Игроков онлайн</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-box-open"></i>
+                        <span class="stat-value" id="totalOpened">847,293</span>
+                        <span class="stat-label">Открыто кейсов</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-gem"></i>
+                        <span class="stat-value">2.4M</span>
+                        <span class="stat-label">Выиграно CR</span>
+                    </div>
+                </div>
+
+                <div class="balance-card">
+                    <div class="balance-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="balance-info">
+                        <span class="balance-label">Ваш баланс</span>
+                        <span class="balance-amount" id="balanceAmount">2500</span>
+                        <span class="balance-currency">CREDITS</span>
+                    </div>
+                    <button class="add-credits-btn" id="addCreditsBtn">
+                        <i class="fas fa-plus-circle"></i> ПОПОЛНИТЬ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="live-drop-banner" id="liveDropBanner">
+            <div class="live-dot"></div>
+            <span id="liveDropText">Загрузка последних дропов...</span>
+        </div>
+
+        <div class="result-area" id="resultArea" style="display: none;">
+            <div class="result-card">
+                <div class="result-glow"></div>
+                <div class="result-title"><i class="fas fa-gift"></i> ВАМ ВЫПАЛО:</div>
+                <div id="winDisplay" class="win-item"></div>
+            </div>
+        </div>
+
+        <section id="cases">
+            <div class="section-header">
+                <h2 class="section-title">🔥 ДОСТУПНЫЕ КЕЙСЫ</h2>
+                <div class="filter-btns">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="popular">Популярные</button>
+                    <button class="filter-btn" data-filter="new">Новые</button>
+                    <button class="filter-btn" data-filter="premium">Премиум</button>
+                </div>
+            </div>
+            <div class="cases-grid" id="casesGrid"></div>
+        </section>
+
+        <section id="history" class="history-section">
+            <h2 class="section-title">📜 ИСТОРИЯ ОТКРЫТИЙ</h2>
+            <div class="history-controls">
+                <button class="clear-history" id="clearHistory"><i class="fas fa-trash"></i> Очистить</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="history-item placeholder-item"><i class="fas fa-clock"></i> <span>Сделайте первое открытие кейса!</span></div>
+            </div>
+        </section>
+
+        <section id="provably-fair" class="faq-section">
+            <h2 class="section-title">🔒 PROVABLY FAIR</h2>
+            <div class="faq-content">
+                <p>Все результаты генерируются честно с использованием криптографического алгоритма. Каждый бросок можно проверить независимо.</p>
+                <button class="btn-verify" id="verifyBtn"><i class="fas fa-check-circle"></i> Проверить последний результат</button>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://avatars.mds.yandex.net/i?id=1a02d375a183d167ac5a620ffdf3571e_l-4256054-images-thumbs&n=13" alt="Keys Battle">
+                <span>Keys Battle © 2025</span>
+            </div>
+            <div class="social">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
